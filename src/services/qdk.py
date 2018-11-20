@@ -27,7 +27,9 @@ class QdkService(object):
 
     @classmethod
     def update_record(cls):
-        pass
+        device_id, is_available = Keng.get_now_is_available()
+        mtime = History.query_latast_ultrasonic(device_id, is_available)
+        print mtime
 
 
 

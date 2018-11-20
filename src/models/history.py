@@ -3,6 +3,7 @@
 
 from src.models.base import EntityModel
 from src.exts import db
+from sqlalchemy import desc
 
 
 
@@ -17,12 +18,13 @@ class History(EntityModel):
 
 
     @classmethod
-    def add_new_record(cls, device_id, ttype, is_available):
+    def add_new_record(cls, device_id, ttype, is_available=False):
         h = cls(ttype = ttype, device_id = device_id, is_available = is_available)
         db.session.add(h)
         db.session.commit()
 
 
     @classmethod
-    def query_latast_ultrasonic(cls):
-        pass
+    def query_latast_ultrasonic(cls, device_id, is_available):
+        ret = cls.query.filter(cls.device_id == device_id, cls.is_available == is_available).order_by(desc(cls.modified_time)).first()
+        return ret.modified_time

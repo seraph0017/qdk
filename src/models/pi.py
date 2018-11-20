@@ -37,7 +37,7 @@ class Pi(EntityModel):
 
     @classmethod
     def refresh_time(cls, device_id):
-        pi = Pi.query.filter(cls.device_id == device_id).first()
+        pi = cls.query.filter(cls.device_id == device_id).first()
         pi.modified_time = db.func.current_timestamp()
         db.session.add(pi)
         db.session.commit()

@@ -36,4 +36,4 @@ class Keng(EntityWithNameModel):
     @classmethod
     def get_now_is_available(cls):
         ret = cls.query.order_by(desc(cls.modified_time)).first()
-        return ret.is_available
+        return ret.device_id, ret.is_available

@@ -41,7 +41,7 @@ def createdb():
 
 @manager.command
 def updaterecord():
-    pass
+    QdkService.update_record()
 
 
 
