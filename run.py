@@ -5,7 +5,7 @@ import multiprocessing
 
 from gunicorn.app.base import BaseApplication
 from gunicorn.six import iteritems
-from src.app import create_app
+from src import create_app
 
 def number_of_workers():
     return (multiprocessing.cpu_count() * 2) + 1
