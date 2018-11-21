@@ -13,7 +13,8 @@ keng = Blueprint('keng',__name__)
 
 @keng.route('/', methods=['GET'])
 def keng_index_handler():
-    return jsonify(dict(code=0,message="success",data=QdkService.query_all_keng()))
+    items = QdkService.query_all_keng()
+    return jsonify(dict(code=0,message="success",data=items))
 
 @keng.route('/hc', methods=['POST'])
 @pi_required

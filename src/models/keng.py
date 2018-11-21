@@ -19,6 +19,8 @@ class Keng(EntityWithNameModel):
     duration        = db.Column(db.String(120))
     is_available    = db.Column(db.Boolean())
     device_id       = db.Column(db.String(120))
+    floor           = db.Column(db.Integer)
+
 
 
     @classmethod
@@ -29,11 +31,14 @@ class Keng(EntityWithNameModel):
     @classmethod
     def refresh_is_available(cls, device_id, is_available):
         keng = cls.query.filter(cls.device_id == device_id).first()
-        keng.is_available = is_available
-        db.session.add(keng)
-        db.session.commit()
+        if keng:
+            keng.is_available = is_available
+            db.session.add(keng)
+            db.session.commit()
 
     @classmethod
     def get_now_is_available(cls):
         ret = cls.query.order_by(desc(cls.modified_time)).first()
-        return ret.device_id, ret.is_available
+        if ret.is_available:
+            return ret.device_id, False
+        return ret.device_id, True

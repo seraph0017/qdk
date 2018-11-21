@@ -8,7 +8,7 @@ from src.decorator import transfer2json
 class QdkService(object):
 
     @classmethod
-    @transfer2json("?id|!name|!comment|!location|$status|!duration|$is_available")
+    @transfer2json("?id|!floor|!name|!comment|!location|$status|!duration|$is_available|!gender")
     def query_all_keng(cls):
         return Keng.query_all()
 
